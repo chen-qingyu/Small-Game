@@ -1,15 +1,15 @@
+#include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-#include <windows.h>
 #include <time.h>
+#include <windows.h>
 
 #define HEIGHT 20
-#define WIDTH  50
-#define UP     1
-#define DOWN   2
-#define LEFT   3
-#define RIGHT  4
+#define WIDTH 50
+#define UP 1
+#define DOWN 2
+#define LEFT 3
+#define RIGHT 4
 
 void init();
 void show();
@@ -69,15 +69,25 @@ void show()
         for (int j = 0; j < WIDTH; ++j)
         {
             if (canvas[i][j] == 0)
+            {
                 printf(" ");
+            }
             else if (canvas[i][j] == -1)
+            {
                 printf("+");
+            }
             else if (canvas[i][j] == 1)
+            {
                 printf("@");
+            }
             else if (canvas[i][j] > 1)
+            {
                 printf("*");
+            }
             else if (canvas[i][j] == -2)
+            {
                 printf("$");
+            }
         }
         printf("\n");
     }
@@ -94,17 +104,33 @@ void updateWithInput()
     {
         input = getch();
         if (direction != DOWN)
+        {
             if (input == 'w' || input == 'W')
+            {
                 direction = UP;
+            }
+        }
         if (direction != UP)
+        {
             if (input == 's' || input == 'S')
+            {
                 direction = DOWN;
+            }
+        }
         if (direction != RIGHT)
+        {
             if (input == 'a' || input == 'A')
+            {
                 direction = LEFT;
+            }
+        }
         if (direction != LEFT)
+        {
             if (input == 'd' || input == 'D')
+            {
                 direction = RIGHT;
+            }
+        }
     }
 }
 
@@ -112,7 +138,9 @@ void updateWithoutInput()
 {
     int max = 0, oldTail_i, oldTail_j, oldHead_i, oldHead_j, newHead_i, newHead_j;
     for (int i = 0; i < HEIGHT; ++i)
+    {
         for (int j = 0; j < WIDTH; ++j)
+        {
             if (canvas[i][j] > 0)
             {
                 canvas[i][j]++;
@@ -128,6 +156,8 @@ void updateWithoutInput()
                     oldHead_j = j;
                 }
             }
+        }
+    }
     if (direction == UP)
     {
         newHead_i = oldHead_i - 1;

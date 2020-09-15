@@ -48,11 +48,17 @@ void show()
         for (int j = 0; j < width; ++j)
         {
             if ((i == bird_y) && (j == bird_x))
+            {
                 printf("@");
+            }
             else if ((j == bar_x) && ((i <= bar_y1) || (i >= bar_y2)))
+            {
                 printf("|");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -69,7 +75,9 @@ void updateWithInput()
         input = getch();
 
         if (input == ' ')
+        {
             bird_y -= 2;
+        }
     }
 }
 
@@ -85,7 +93,9 @@ void updateWithoutInput()
     }
 
     if (bar_x > 0)
+    {
         bar_x--;
+    }
     else
     {
         bar_x = width;

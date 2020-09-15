@@ -47,9 +47,13 @@ void init()
         for (int j = 0; j <= width; ++j)
         {
             if ((i == height) || (j == width))
+            {
                 printf("+");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -64,13 +68,21 @@ void show()
         for (int j = 0; j < width; ++j)
         {
             if ((i == plane_y) && (j == plane_x))
+            {
                 printf("*");
+            }
             else if ((i == bullet_y) && (j == bullet_x))
+            {
                 printf("|");
+            }
             else if ((i == target_y) && (j == target_x))
+            {
                 printf("@");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -86,17 +98,33 @@ void updateWithInput()
         input = getch();
 
         if (plane_y != 0)
+        {
             if (input == 'w' || input == 'W')
+            {
                 plane_y--;
+            }
+        }
         if (plane_y != height - 1)
+        {
             if (input == 's' || input == 'S')
+            {
                 plane_y++;
+            }
+        }
         if (plane_x != 0)
+        {
             if (input == 'a' || input == 'A')
+            {
                 plane_x--;
+            }
+        }
         if (plane_x != width - 1)
+        {
             if (input == 'd' || input == 'D')
+            {
                 plane_x++;
+            }
+        }
         if (input == ' ')
         {
             bullet_y = plane_y;
@@ -125,7 +153,9 @@ void updateWithoutInput()
 
     static int speed = 0;
     if (speed < 20 - score)
+    {
         speed++;
+    }
 
     if (target_y > height)
     {
@@ -141,7 +171,9 @@ void updateWithoutInput()
         }
     }
     if (bullet_y > -1)
+    {
         bullet_y--;
+    }
 }
 
 void gotoxy(int x, int y)

@@ -53,9 +53,13 @@ void init()
         for (int j = 0; j <= WIDTH; ++j)
         {
             if ((i == HEIGHT) || (j == WIDTH))
+            {
                 printf("+");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -70,13 +74,21 @@ void show()
         for (int j = 0; j < WIDTH; ++j)
         {
             if (canvas[i][j] == 1)
+            {
                 printf("*");
+            }
             else if (canvas[i][j] == 2)
+            {
                 printf("|");
+            }
             else if (canvas[i][j] == 3)
+            {
                 printf("@");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -92,42 +104,56 @@ void updateWithInput()
         input = getch();
 
         if (plane_y != 0)
+        {
             if (input == 'w' || input == 'W')
             {
                 canvas[plane_y][plane_x] = 0;
                 plane_y--;
                 canvas[plane_y][plane_x] = 1;
             }
+        }
         if (plane_y != HEIGHT - 1)
+        {
             if (input == 's' || input == 'S')
             {
                 canvas[plane_y][plane_x] = 0;
                 plane_y++;
                 canvas[plane_y][plane_x] = 1;
             }
+        }
         if (plane_x != 0)
+        {
             if (input == 'a' || input == 'A')
             {
                 canvas[plane_y][plane_x] = 0;
                 plane_x--;
                 canvas[plane_y][plane_x] = 1;
             }
+        }
         if (plane_x != WIDTH - 1)
+        {
             if (input == 'd' || input == 'D')
             {
                 canvas[plane_y][plane_x] = 0;
                 plane_x++;
                 canvas[plane_y][plane_x] = 1;
             }
+        }
         if (input == ' ')
         {
             int left = plane_x - weapon, right = plane_x + weapon;
             if (left < 0)
+            {
                 left = 0;
+            }
             if (right > WIDTH - 1)
+            {
                 right = WIDTH - 1;
+            }
             for (int i = left; i <= right; ++i)
+            {
                 canvas[plane_y - 1][i] = 2;
+            }
         }
     }
 }
@@ -136,7 +162,9 @@ void updateWithoutInput()
 {
     int i, j, k;
     for (i = 0; i < HEIGHT; ++i)
+    {
         for (j = 0; j < WIDTH; ++j)
+        {
             if (canvas[i][j] == 2)
             {
                 for (k = 0; k < TARGET; ++k)
@@ -149,13 +177,19 @@ void updateWithoutInput()
                         canvas[target_y[k]][target_x[k]] = 3;
                         score++;
                         if (score % 3 == 0)
+                        {
                             weapon++;
+                        }
                     }
                 }
                 canvas[i][j] = 0;
                 if (i > 0)
+                {
                     canvas[i - 1][j] = 2;
+                }
             }
+        }
+    }
 
     for (k = 0; k < TARGET; ++k)
     {
@@ -171,7 +205,9 @@ void updateWithoutInput()
 
     static int speed = 0;
     if (speed < 20 - score / 2)
+    {
         speed++;
+    }
     if (speed >= 20 - score / 2)
     {
         for (k = 0; k < TARGET; ++k)

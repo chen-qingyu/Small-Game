@@ -53,9 +53,13 @@ void init()
         for (int j = 0; j <= width; ++j)
         {
             if ((i == height) || (j == width))
+            {
                 printf("+");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -70,13 +74,21 @@ void show()
         for (int j = 0; j < width; ++j)
         {
             if ((i == ball_y) && (j == ball_x))
+            {
                 printf("o");
+            }
             else if ((i == 0) && (j >= money_x - 1) && (j <= money_x + 1))
+            {
                 printf("$");
+            }
             else if ((i == height - 1) && (j >= left) && (j <= right))
+            {
                 printf("=");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -92,11 +104,19 @@ void updateWithInput()
         input = getch();
 
         if (position_x != 0)
+        {
             if (input == 'a' || input == 'A')
+            {
                 position_x--;
+            }
+        }
         if (position_x != width - 1)
+        {
             if (input == 'd' || input == 'D')
+            {
                 position_x++;
+            }
+        }
     }
     Sleep(80);
 }
@@ -132,9 +152,13 @@ void updateWithoutInput()
     ball_y += v_y;
 
     if ((ball_y == 0))
+    {
         v_y = -v_y;
+    }
     if ((ball_x == 0) || (ball_x == width - 1))
+    {
         v_x = -v_x;
+    }
 }
 
 void gotoxy(int x, int y)

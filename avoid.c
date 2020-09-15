@@ -46,9 +46,13 @@ void init()
         for (int j = 0; j <= width; ++j)
         {
             if ((i == height) || (j == width))
+            {
                 printf("+");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -64,19 +68,33 @@ void show()
         for (int j = 0; j < width; ++j)
         {
             if ((i == man_y) && (j == man_x))
+            {
                 printf("*");
+            }
             else if ((i == monster_y[0]) && (j == monster_x[0]))
+            {
                 printf("!");
+            }
             else if ((i == monster_y[1]) && (j == monster_x[1]))
+            {
                 printf("!");
+            }
             else if ((i == monster_y[2]) && (j == monster_x[2]))
+            {
                 printf("!");
+            }
             else if ((i == monster_y[3]) && (j == monster_x[3]))
+            {
                 printf("!");
+            }
             else if ((i == monster_y[4]) && (j == monster_x[4]))
+            {
                 printf("!");
+            }
             else
+            {
                 printf(" ");
+            }
         }
         printf("\n");
     }
@@ -93,17 +111,33 @@ void updateWithInput()
         input = getch();
 
         if (man_y != 0)
+        {
             if (input == 'w' || input == 'W')
+            {
                 man_y--;
+            }
+        }
         if (man_y != height - 1)
+        {
             if (input == 's' || input == 'S')
+            {
                 man_y++;
+            }
+        }
         if (man_x != 0)
+        {
             if (input == 'a' || input == 'A')
+            {
                 man_x--;
+            }
+        }
         if (man_x != width - 1)
+        {
             if (input == 'd' || input == 'D')
+            {
                 man_x++;
+            }
+        }
     }
 }
 
@@ -112,6 +146,7 @@ void updateWithoutInput()
     for (int i = 0; i < N; ++i)
     {
         if ((man_x == monster_x[i]) && (man_y == monster_y[i]))
+        {
             if ((double)(end - start) / CLOCKS_PER_SEC > 20)
             {
                 printf("\nYou're tooooooooo agile!\n");
@@ -124,23 +159,34 @@ void updateWithoutInput()
                 getchar();
                 exit(0);
             }
+        }
     }
 
     static int speed = 0;
     if (speed < 20 - (end - start) / CLOCKS_PER_SEC)
+    {
         speed++;
+    }
     if (speed >= 20 - (end - start) / CLOCKS_PER_SEC)
     {
         for (int i = 0; i < N; ++i)
         {
             if (monster_x[i] < man_x)
+            {
                 monster_x[i]++;
+            }
             if (monster_x[i] > man_x)
+            {
                 monster_x[i]--;
+            }
             if (monster_y[i] < man_y)
+            {
                 monster_y[i]++;
+            }
             if (monster_y[i] > man_y)
+            {
                 monster_y[i]--;
+            }
         }
         speed = 0;
     }
