@@ -1,10 +1,10 @@
+#include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-#include <windows.h>
 #include <time.h>
+#include <windows.h>
 
-#define HEIGHT  20
+#define HEIGHT 20
 #define WIDTH 50
 #define TARGET 5
 
@@ -121,7 +121,7 @@ void updateWithInput()
             }
         if (input == ' ')
         {
-            int left = plane_x - weapon , right = plane_x + weapon;
+            int left = plane_x - weapon, right = plane_x + weapon;
             if (left < 0)
                 left = 0;
             if (right > WIDTH - 1)

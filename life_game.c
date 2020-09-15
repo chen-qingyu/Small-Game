@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <time.h>
 
-#define HEIGHT  25
+#define HEIGHT 25
 #define WIDTH 50
 
 void init();
