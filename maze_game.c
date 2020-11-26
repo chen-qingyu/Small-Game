@@ -31,6 +31,7 @@ int step_arr[MAX_STEP] = {0};
 int reset_flag = 0;
 
 /* Function prototypes for functions */
+void menu(void);
 void init_map(void);
 void create_map(int x, int y);
 int get_key();
@@ -51,6 +52,7 @@ int main()
 {
     do
     {
+        menu();
         init_map();
         game();
     } while (reset_flag);
@@ -59,37 +61,26 @@ int main()
     return 0;
 }
 
-void init_map(void)
+void menu(void)
 {
-    // 标题
-    system("title maze game");
-    // 初始化随机种子
-    srand(time(NULL));
-    // 隐藏光标
-    hide_cursor();
-
-    for (int i = 0; i < MAX_STEP; i++)
-    {
-        step_arr[MAX_STEP] = 0;
-    }
-
-    reset_flag = 0;
-    height = 25;
-    width = 25;
-
-    int choice;
     system("cls");
+
     printf("Welcome to the maze game!\n");
     printf("\n");
     printf(" - 1. Start game with default size 25 x 25.\n");
     printf(" - 2. Set size.\n");
     printf(" - 0. Exit.\n");
     printf("Your choice: ");
+
+    int choice;
     scanf("%d", &choice);
-    if (choice == 0)
+
+    if (choice == 1)
     {
-        exit(0);
+        height = 25;
+        width = 25;
     }
+
     if (choice == 2)
     {
         printf("Please input the size of map.\n");
@@ -121,7 +112,30 @@ void init_map(void)
             is_even = (height % 2 == 0) || (width % 2 == 0);
         }
     }
+
+    if (choice == 0)
+    {
+        exit(0);
+    }
+
     system("cls");
+}
+
+void init_map(void)
+{
+    // 标题
+    system("title Maze Game");
+    // 初始化随机种子
+    srand(time(NULL));
+    // 隐藏光标
+    hide_cursor();
+
+    for (int i = 0; i < MAX_STEP; i++)
+    {
+        step_arr[i] = 0;
+    }
+
+    reset_flag = 0;
 
     // 初始化迷宫
     for (int i = 0; i <= height + 1; i++)
@@ -213,12 +227,9 @@ int get_key()
     char c;
     while (c = getch())
     {
-        if (c == 'R' ||
-                c == 'r' ||
-                c == 'Q' ||
-                c == 'q' ||
-                c == 'E' ||
-                c == 'e')
+        if (c == 'R' || c == 'r' ||
+            c == 'Q' || c == 'q' ||
+            c == 'E' || c == 'e')
         {
             return c;
         }
@@ -284,7 +295,7 @@ void game()
     while (1)
     {
         move_cursor(2 * y - 2, x - 1);
-        printf("@");          // 画出玩家当前位置
+        printf("@"); // 画出玩家当前位置
 
         if (map[x][y] == END) // 判断是否到达出口
         {
@@ -307,6 +318,7 @@ void game()
         }
         if (c == 'Q' || c == 'q')
         {
+            printf("Boodbye.\n");
             exit(0);
         }
         switch (c)
