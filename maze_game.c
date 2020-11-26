@@ -9,9 +9,6 @@
 #define START 2
 #define END 3
 
-// 终止
-#define ESC 5
-
 // 方向
 #define UP 1
 #define DOWN 2
@@ -99,15 +96,29 @@ void init_map(void)
         printf("Size must be odd, space separation.\n");
         printf("height width = ");
         scanf("%d %d", &height, &width);
-        while (height >= MAX_SIZE || width >= MAX_SIZE)
+        int is_too_big = (height >= MAX_SIZE) || (width >= MAX_SIZE);
+        int is_too_small = (height <= 1) || (width <= 1);
+        int is_even = (height % 2 == 0) || (width % 2 == 0);
+        while (is_too_big || is_too_small || is_even)
         {
-            printf("Max size is %d, please input again.\n", MAX_SIZE);
+            if (is_too_big)
+            {
+                printf("Size must < %d.\n", MAX_SIZE);
+            }
+            if (is_too_small)
+            {
+                printf("Size must > 1.\n");
+            }
+            if (is_even)
+            {
+                printf("Size must be odd.\n");
+            }
+            printf("Please input again.\n");
+            printf("height width = ");
             scanf("%d %d", &height, &width);
-        }
-        while (height % 2 == 0 || width % 2 == 0)
-        {
-            printf("Size must be odd, please input again.\n");
-            scanf("%d %d", &height, &width);
+            is_too_big = (height >= MAX_SIZE) || (width >= MAX_SIZE);
+            is_too_small = (height <= 1) || (width <= 1);
+            is_even = (height % 2 == 0) || (width % 2 == 0);
         }
     }
     system("cls");
@@ -157,11 +168,11 @@ void init_map(void)
         }
     }
 
-    move_cursor(2 * height + 2, 0);
-    printf("Press Esc to end game.");
-    move_cursor(2 * height + 2, 2);
+    move_cursor(2 * width + 2, 0);
+    printf("Press E to end game.");
+    move_cursor(2 * width + 2, 2);
     printf("Press R to restart game.");
-    move_cursor(2 * height + 2, 4);
+    move_cursor(2 * width + 2, 4);
     printf("Press Q to quit game.");
 }
 
@@ -202,14 +213,12 @@ int get_key()
     char c;
     while (c = getch())
     {
-        if (c == 27)
-        {
-            return ESC;
-        }
         if (c == 'R' ||
                 c == 'r' ||
                 c == 'Q' ||
-                c == 'Q')
+                c == 'q' ||
+                c == 'E' ||
+                c == 'e')
         {
             return c;
         }
@@ -269,6 +278,9 @@ void game()
     int x = 2, y = 1; // 玩家当前位置，刚开始在入口处
     int c;            // 接收按键
     int step = 0;
+    step_arr[step] = x;
+    step_arr[step + 1] = y;
+    step += 2;
     while (1)
     {
         move_cursor(2 * y - 2, x - 1);
@@ -282,7 +294,7 @@ void game()
         }
 
         c = get_key();
-        if (c == ESC)
+        if (c == 'E' || c == 'e')
         {
             move_cursor(0, height);
             printf("End game.\n");
@@ -304,40 +316,40 @@ void game()
                 {
                     draw_point(x, y);
                     x--;
+                    step_arr[step] = x;
+                    step_arr[step + 1] = y;
+                    step += 2;
                 }
-                step_arr[step] = x;
-                step_arr[step + 1] = y;
-                step += 2;
                 break;
             case RIGHT:
                 if (map[x + 1][y] != WALL)
                 {
                     draw_point(x, y);
                     x++;
+                    step_arr[step] = x;
+                    step_arr[step + 1] = y;
+                    step += 2;
                 }
-                step_arr[step] = x;
-                step_arr[step + 1] = y;
-                step += 2;
                 break;
             case UP:
                 if (map[x][y - 1] != WALL)
                 {
                     draw_point(x, y);
                     y--;
+                    step_arr[step] = x;
+                    step_arr[step + 1] = y;
+                    step += 2;
                 }
-                step_arr[step] = x;
-                step_arr[step + 1] = y;
-                step += 2;
                 break;
             case DOWN:
                 if (map[x][y + 1] != WALL)
                 {
                     draw_point(x, y);
                     y++;
+                    step_arr[step] = x;
+                    step_arr[step + 1] = y;
+                    step += 2;
                 }
-                step_arr[step] = x;
-                step_arr[step + 1] = y;
-                step += 2;
                 break;
             default:
                 break;
